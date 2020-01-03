@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <script>
+      window.addEventListener('message', function(event) { 
+
+      // IMPORTANT: Check the origin of the data! 
+      if (~event.origin.indexOf('http://192.168.1.192:3000')) { 
+          // The data has been sent from your site 
+
+          // The data sent with postMessage is stored in event.data 
+          console.log(event.data); 
+      } else { 
+          // The data hasn't been sent from your site! 
+          // Be careful! Do not use it. 
+          return; 
+      } 
+      }); 
+        // Helper function to get parameters from the query string.
+        function getUrlParam( paramName ) {
+            var reParam = new RegExp( '(?:[\?&]|&)' + paramName + '=([^&]+)', 'i' );
+            var match = window.location.search.match( reParam );
+
+            return ( match && match.length > 1 ) ? match[1] : null;
+        }
+        // Simulate user action of selecting a file to be returned to CKEditor.
+        function returnFileUrl(url) {
+
+          var funcNum = getUrlParam( 'CKEditorFuncNum' );
+            var fileUrl = url;
+            console.log(window.opener);
+            window.opener.CKEDITOR.tools.callFunction( funcNum, fileUrl, function() {
+                // Get the reference to a dialog window.
+                var dialog = this.getDialog();
+                // Check if this is the Image Properties dialog window.
+                if ( dialog.getName() == 'image' ) {
+                    // Get the reference to a text field that stores the "alt" attribute.
+                    var element = dialog.getContentElement( 'info', 'txtAlt' );
+                    // Assign the new value.
+                    if ( element )
+                        element.setValue( 'alt text' );
+                }
+                // Return "false" to stop further execution. In such case CKEditor will ignore the second argument ("fileUrl")
+                // and the "onSelect" function assigned to the button that called the file manager (if defined).
+                // return false;
+            } );
+            window.close();
+        }
+    </script>
+</head>
+<body> 
+<div class="container-fluid bg-3 text-center">    
+  <h3><%= page %></h3><br>
+  <div class="row">
+      <% for(var i = 0; i < data.length; i++){%> 
+        <div class="col-sm-4">
+          <a href="javascript:;" onclick="returnFileUrl('http://192.168.1.129:3001/<%= data[i] %>')">
+              <img src="http://192.168.0.129:3001/<%= data[i] %>" width="180px"/> 
+          </a>
+        </div>
+      <%} %>
+    
+  </div>
+</div>
+</body> 
+</html>
