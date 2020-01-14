@@ -38,6 +38,24 @@ module.exports = function (app) {
             res.send(task);
         });
     })
+    app.post('/document/checkDocumentStatusByCode', function (req, res) {
+        Task_Document.checkDocumentStatusByCode(req.body, function (err, task) {
+            //console.log('controller')
+            if (err)
+                res.send(err);
+
+            res.send(task);
+        });
+    })
+    app.post('/document/checkpersonupload', function (req, res) {
+        Task_Document.checkpersonupload(req.body, function (err, task) {
+            //console.log('controller')
+            if (err)
+                res.send(err);
+
+            res.send(task);
+        });
+    })
     app.post('/document/getDocBycode', function (req, res) {
         Task_Document.getDocBycode(req.body, function (err, task) {
             //console.log('controller')
@@ -58,6 +76,15 @@ module.exports = function (app) {
     })
     app.post('/document/DeleteUpload', function (req, res) {
         Task_Document.DeleteUpload(req.body, function (err, task) {
+            //console.log('controller')
+            if (err)
+                res.send(err);
+
+            res.send(task);
+        });
+    })
+    app.post('/document/CheckremarkDoc', function (req, res) {
+        Task_Document.CheckremarkDoc(req.body, function (err, task) {
             //console.log('controller')
             if (err)
                 res.send(err);

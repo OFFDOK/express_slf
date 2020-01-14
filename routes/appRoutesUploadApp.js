@@ -9,28 +9,31 @@ const _config = new Config();
 var multer = require('multer');
 module.exports = function (app) {
 
-    app.post('/upload-image', async function (req, res) {
+    app.post('/upload-pdf', async function (req, res) {
+
         var filePathSub = '';
         var Storage = multer.diskStorage({
 
             destination: function (req, file, callback) {
-                const userPath = 'student-document' + "/"
+                const userPath = 'student-document' + "/" + req.body.semester.replace("/","-")
                 const subPath = '../public/' + userPath;
                 filePathSub = path.join(__dirname, subPath);
                 //filePathSub = 'public_file/' + req.body.upload_url + '/' + userPath;
                 mkdirp.sync(filePathSub)
                 callback(null, filePathSub);
+
             },
             filename: function (req, file, callback) {
-                // console.log("file : ",req.file.filename);
-                callback(null, uuidv4() + '.pdf');
+                console.log("file : ",req.body.pdfname);
+                callback(null, req.body.pdfname);
             }
+
 
         });
 
         var upload = multer({
             storage: Storage
-        }).single("files");
+        }).single("PDF");
 
         upload(req, res, function (err) {
             // console.log("body = >", req.body);
@@ -50,7 +53,7 @@ module.exports = function (app) {
             } else {
                 const require = {
                     data: {
-                        doc_url: 'student-document' + "/" + req.file.filename
+                        doc_url: 'student-document' + "/" + req.body.semester + "/" + req.file.filename
                     },
                     error: [{ message: 'Upload Document complete.' }],
                     upload_result: true,
