@@ -59,7 +59,7 @@ Task.checkDocumentStatusByCode = function checkDocumentStatusByCode(code, result
     var str = "SELECT * FROM `tb_type_of_document`"
         + " LEFT JOIN tb_upload_document ON tb_type_of_document.type_of_document_id = tb_upload_document.type_of_document_id"
         + " ORDER BY tb_type_of_document.type_of_document_id"
-    console.log(str);
+    // console.log(str);
 
     sql.query(str, function (err, res) {
         if (err) {
@@ -120,7 +120,7 @@ Task.CheckOldDoc = function CheckOldDoc(code) {
             + " WHERE `ID` ='" + detail_doc[0].ID + "' AND `type_of_document_id` = '" + detail_doc[0].type_of_document + "'"
             + " AND `semester_name` ='" + semester_name + "';"
 
-        console.log(str);
+        // console.log(str);
 
         sql.query(str, function (err, res) {
             if (err) {
@@ -256,7 +256,7 @@ Task.DeleteUpload = function DeleteUpload(code, result) {
 
     var str = "DELETE FROM `tb_upload_document` WHERE `ID` ='" + ID + "' AND `type_of_document_id` ='" + type + "';"
 
-    console.log(str);
+    // console.log(str);
 
     sql.query(str, function (err, res) {
         if (err) {
@@ -362,7 +362,7 @@ Task.checkpersonupload = function checkpersonupload(code, result) {
 Task.CheckremarkDoc = function CheckremarkDoc(code, result) {
     //console.log(" = ", code);
     var str = "SELECT `remark` FROM `tb_upload_document` WHERE `type_of_document_id` ='" + code.type + "' AND ID ='" + code.ID + "' AND `semester_name`= '" + code.semester + "'"
-    console.log(str);
+    // console.log(str);
 
     sql.query(str, function (err, res) {
         if (err) {

@@ -62,7 +62,7 @@ Task.insertVerifyData = function insertVerifyData(data, result) {
 Task.checkVerifyCode = function checkVerifyCode(data, result) {
 
     var str = "SELECT * FROM `tb_verify` WHERE `verify_code` ='" + data.verify_code + "' AND `student_id` ='" + data.student_id + "'"
-    console.log(str);
+    // console.log(str);
 
     sql.query(str, function (err, res) {
 
@@ -86,7 +86,7 @@ Task.renewPassword = function renewPassword(data, result) {
         + " `verify_status`= 'used'"
         + " WHERE `verify_code`='" + data.verify_code + "'"
         + " AND `student_id`='" + data.student_id + "';"
-    console.log(str);
+    // console.log(str);
 
     sql.query(str, function (err, res) {
 

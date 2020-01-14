@@ -9,7 +9,7 @@ var Task = function (task) {
 Task.getBookingDateBy = function getBookingDateBy() {
     return new Promise(function (resolve, reject) {
         var str = "SELECT * FROM `tb_define_booking` ORDER BY `define_booking_date_start` ASC";
-        console.log(str);
+        // console.log(str);
         
         sql.query(str, function (err, res) {
             if (err) {
@@ -25,7 +25,7 @@ Task.getBookingDateBy = function getBookingDateBy() {
 Task.checkBookingDateBy = function checkBookingDateBy(data) {
     return new Promise(function (resolve, reject) {
         var str = "SELECT COUNT(ID) AS queue FROM `tb_booking` WHERE `booking_date` = '" + data.date + "'";
-        console.log(str);
+        // console.log(str);
 
         sql.query(str, function (err, res) {
             if (err) {
@@ -89,7 +89,7 @@ Task.ShowBookingTime = function ShowBookingTime(code, result) {
     var str = "SELECT  `define_booking_time_start`, `define_booking_time_end` FROM `tb_define_booking`"
         + " WHERE `define_booking_date_start` ='" + code.date + "'";
 
-    console.log(str);
+    // console.log(str);
 
     sql.query(str, function (err, res) {
         if (err) {
@@ -117,7 +117,7 @@ Task.DeleteQueue = function DeleteQueue(code, result) {
     var str = "DELETE FROM `tb_booking` WHERE `ID` ='" + ID + "' AND"
         + " `booking_date` = '" + date + "' AND `booking_time`= '" + time + "'";
 
-    console.log(str);
+    // console.log(str);
 
     sql.query(str, function (err, res) {
         if (err) {
