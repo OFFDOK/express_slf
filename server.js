@@ -39,6 +39,10 @@ app.use((req, res, next) => {
 app.listen(port, () => {
   console.log('API Start server at port 3001.')
 })
+,
+app.get('/', (req,res) => {
+  res.send('express were running!')
+})
 //เรียกรูป มาแสดง  //http://localhost:3001/201966-audir8_2018_103.jpg
 
 var publicDir = require('path').join(__dirname, './public');
