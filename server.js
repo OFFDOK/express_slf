@@ -14,23 +14,11 @@ app.locals.testFunction = function () {
   return 'Test Function';
 };
 
-// SET Views
-
-// set engine html
-/* app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'html');
-
-/// set engine jade
-/* app.set('views', __dirname + '/views');
-app.set('view engine', 'jade'); */
-
+var port = process.env.PORT || 3001;
 
 /// set engine handlebars
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
-
-
-
 
 app.use((req, res, next) => {
   const origin = req.get('origin');
@@ -48,7 +36,7 @@ app.use((req, res, next) => {
   }
 });
 
-app.listen(3001, () => {
+app.listen(port, () => {
   console.log('API Start server at port 3001.')
 })
 //เรียกรูป มาแสดง  //http://localhost:3001/201966-audir8_2018_103.jpg
