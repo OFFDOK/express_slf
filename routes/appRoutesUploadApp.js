@@ -1,11 +1,11 @@
-const upload = require('../library/uploadMiddleware');
-const Resize = require('../library/Resize');
+// const upload = require('../library/uploadMiddleware');
+// const Resize = require('../library/Resize');
 const Config = require('../globals/Config');
 const path = require('path');
 const mkdirp = require('mkdirp')
-const uuidv4 = require('uuid/v4');
-const fs = require('fs');
-const _config = new Config();
+// const uuidv4 = require('uuid/v4');
+// const fs = require('fs');
+// const _config = new Config();
 var multer = require('multer');
 module.exports = function (app) {
 
