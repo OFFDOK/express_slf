@@ -9,7 +9,7 @@ var transporter = nodemailer.createTransport("SMTP", {
     service: 'Gmail',
     auth: {
         user: 'tchayanonz@gmail.com', // your email
-        pass: 'off12082540' // your email password
+        pass: 'tiangpolkrang' // your email password
     }
 });
 
@@ -21,16 +21,18 @@ Task.sendemail = function sendemail(data, result) {
         to: data.email,              // list of receivers
         subject: 'รหัสยืนยันการตั้งรหัสผ่านใหม่',            // Mail subject
         html: '<b>สวัสดีคุณ' + data.student_name + '<br>รหัสยืนยันของคุณ คือ'
-            + '<br> <center><font size="6" color="red">' + data.verify_code + '</font></center><br>'
-            + 'โปรดนำรหัสการยืนยันนี้ กรอกในแอพพลิเคชันเพื่อดำเนินการเปลี่ยนรหัสผ่านต่อไป </b>' // HTML body
+            + '<br> <center><font size="6" color="red">' + data.verify_code + '</font></center>' // HTML body
     };
 
     // send mail with defined transport object
     transporter.sendMail(mailOptions, function (err, info) {
-        if (err)
+        if (err) {
             console.log(err)
-        else
+            result(null, err);
+        } else {
             console.log(info);
+            result(null, info);
+        }
     });
 };
 Task.insertVerifyData = function insertVerifyData(data, result) {

@@ -14,12 +14,11 @@ var connection = mysql.createConnection({
 
 // var connection = mysql.createConnection({
 //     connectionimit: 100,
-//     host: 'localhost',
-//     user: 'root',
+//     host: 'it2.sut.ac.th',
+//     user: 'project62_g24',
 //     port: 3306,
-//     password: 'password',
-//     // database: 'revelsoft_erp_mtp_tmp',
-//     database: 'df_slf',
+//     password: '404404',
+//     database: 'project62_g24',
 //     multipleStatements: true
 // });
 

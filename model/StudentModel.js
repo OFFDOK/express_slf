@@ -28,6 +28,7 @@ Task.checkLogin = function checkLogin(data, result) {
 
     var str = "SELECT  * FROM `tb_student` "
         + " LEFT JOIN tb_school_of ON tb_student.student_school_of = tb_school_of.school_of_id"
+        + " LEFT JOIN  tb_intitute ON tb_student.student_intitute = tb_intitute.intitute_id"
         + " WHERE student_id = " + sql.escape(data.user_username) + ""
         + "AND student_password = " + sql.escape(data.user_password) + "";
     // console.log(str);

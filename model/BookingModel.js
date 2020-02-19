@@ -62,7 +62,7 @@ Task.CheckOrder = function CheckOrder(code, result) {
     });
 };
 Task.getMinMaxBookingDateBy = function getMinMaxBookingDateBy(result) {
-    var str = "SELECT MIN(`define_booking_date_start`) AS min_date, MAX(`define_booking_date_start`) AS max_date FROM `tb_define_booking`";
+    var str = "SELECT MIN(`define_booking_date_start`) AS min_date, MAX(`define_booking_date_start`) AS max_date, MIN(`define_booking_time_end`)as min_time ,MAX(`define_booking_time_end`) as max_time FROM `tb_define_booking`";
 
     // console.log(str);
 
@@ -143,7 +143,7 @@ Task.checkQueueOrder = function checkQueueOrder(data) {
         // var ID = data.ID
         var date = data.date
         var time = data.time
-        var str = "SELECT COUNT(ID) AS Queue FROM `tb_booking` WHERE booking_date ='" + date + "'"
+        var str = "SELECT booking_order AS Queue FROM `tb_booking` WHERE booking_date ='" + date + "'"
             + " AND booking_time ='" + time + "'";
         // console.log(str);
 

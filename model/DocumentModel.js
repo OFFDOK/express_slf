@@ -9,7 +9,7 @@ Task.getDateOpenUploadDocument = function getDateOpenUploadDocument(result) {
     //console.log(" = ", code);
     var str = "SELECT MIN(define_upload_date_start) AS min_date ,MAX(define_upload_date_end) AS max_date,semester_name"
         + " FROM tb_define_upload_date WHERE define_upload_date_status ='open';"
-    console.log(str);
+    // console.log(str);
 
     sql.query(str, function (err, res) {
         if (err) {
@@ -84,10 +84,11 @@ Task.getDocBycode = function getDocBycode(code, result) {
 
     ID = code.ID
     type = code.type
-
+    semester = code.semester
     var str = "SELECT * FROM `tb_document`"
         + " WHERE ID ='" + ID + "'"
         + " AND type_of_document_id ='" + type + "'"
+        + " AND semester_name ='" + semester + "';"
 
     // console.log(str);
 
@@ -135,17 +136,27 @@ Task.CheckOldDoc = function CheckOldDoc(code) {
 
 Task.increaseOldDocument = function increaseOldDocument(code) {
     //console.log(" = ", code);
-    //เหลือเช็คการเพิ่มในกรณีที่เคยอัพโหลดเอกสารแล้ว
+
     return new Promise(function (resolve, reject) {
         date = code.date
         detail_doc = code.detail_doc
         name_doc = code.name_doc
         link_doc = code.link_doc
         semester = code.semester
-        var str = "UPDATE `tb_upload_document`"
-            + " SET `add_date`='" + date + "'"
-            + " WHERE `ID` = '" + detail_doc[0].ID + "'"
-            + " AND `student_id` ='" + detail_doc[0].student_id + "';"
+        status = code.status
+        if (status == 3) {
+            var str = "UPDATE `tb_upload_document`"
+                + " SET `add_date`='" + date + "'"
+                + ",`upload_document_status`='รอตรวจสอบข้อมูล'"
+                + ", `remark`=''"
+                + " WHERE `ID` = '" + detail_doc[0].ID + "'"
+                + " AND `student_id` ='" + detail_doc[0].student_id + "';"
+        } else {
+            var str = "UPDATE `tb_upload_document`"
+                + " SET `add_date`='" + date + "'"
+                + " WHERE `ID` = '" + detail_doc[0].ID + "'"
+                + " AND `student_id` ='" + detail_doc[0].student_id + "';"
+        }
         for (var i = 0; i < link_doc.length; i++) {
             str += "INSERT INTO `tb_document`(`ID`,"
                 + " `upload_document_name`,"
@@ -177,7 +188,6 @@ Task.increaseOldDocument = function increaseOldDocument(code) {
 Task.insertNewDocument = function insertNewDocument(code) {
     return new Promise(function (resolve, reject) {
         //console.log(" = ", code);
-        //เหลือเช็คการเพิ่มในกรณีที่เคยอัพโหลดเอกสารแล้ว
         date = code.date
         detail_doc = code.detail_doc
         name_doc = code.name_doc
@@ -253,8 +263,11 @@ Task.DeleteUpload = function DeleteUpload(code, result) {
 
     ID = code.ID
     type = code.type
+    semester = code.semester
 
-    var str = "DELETE FROM `tb_upload_document` WHERE `ID` ='" + ID + "' AND `type_of_document_id` ='" + type + "';"
+    var str = "DELETE FROM `tb_upload_document` "
+        + " WHERE `ID` ='" + ID + "' AND `type_of_document_id` ='" + type + "'"
+        + " AND semester_name = '" + semester + "';"
 
     // console.log(str);
 

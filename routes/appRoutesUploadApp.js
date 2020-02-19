@@ -15,7 +15,7 @@ module.exports = function (app) {
         var Storage = multer.diskStorage({
 
             destination: function (req, file, callback) {
-                const userPath = 'student-document' + "/" + req.body.semester.replace("/","-")
+                const userPath = 'student-document' + "/" + req.body.semester.replace("/", "-")
                 const subPath = '../public/' + userPath;
                 filePathSub = path.join(__dirname, subPath);
                 //filePathSub = 'public_file/' + req.body.upload_url + '/' + userPath;
@@ -24,7 +24,7 @@ module.exports = function (app) {
 
             },
             filename: function (req, file, callback) {
-                console.log("file : ",req.body.pdfname);
+                console.log("file : ", req.body.pdfname);
                 callback(null, req.body.pdfname);
             }
 
@@ -53,7 +53,7 @@ module.exports = function (app) {
             } else {
                 const require = {
                     data: {
-                        doc_url: 'student-document' + "/" + req.body.semester + "/" + req.file.filename
+                        doc_url: 'student-document' + "/" + req.body.semester.replace("/", "-") + "/" + req.file.filename
                     },
                     error: [{ message: 'Upload Document complete.' }],
                     upload_result: true,
