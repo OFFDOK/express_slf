@@ -2,9 +2,13 @@
   "name": "node_slf",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
+    "dev": "node server.js",
     "start": "node server.js"
+  },
+  "engines": {
+    "node": "12.16.x"
   },
   "keywords": [],
   "author": "",
